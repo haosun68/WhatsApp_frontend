@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { WhatsAppHome } from "../components/Chat";
-import Sidebar from "../components/sidebar";
+import { ChatContainer, WhatsappHome } from "../components/Chat";
+import { Sidebar } from "../components/sidebar";
 import { getConversations } from "../features/chatSlice";
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export default function Home() {
       <div className="container h-screen flex py-[19px]">
         {/*Sidebar*/}
         <Sidebar />
-        {activeConversation._id ? "home" : <WhatsAppHome />}
+        {activeConversation._id ? <ChatContainer /> : <WhatsappHome />}
       </div>
     </div>
   );
