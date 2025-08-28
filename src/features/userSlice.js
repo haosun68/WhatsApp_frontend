@@ -62,6 +62,17 @@ export const userSlice = createSlice({
     changeStatus: (state, action) => {
       state.status = action.payload;
     },
+    setMockUser: (state) => {
+      state.user = {
+        id: "mock-user-id",
+        name: "testuser",
+        email: "test@example.com",
+        picture: "",
+        status: "online",
+        token: "mock-token-for-development",
+      };
+      state.status = "succeeded";
+    },
   },
   extraReducers(builder) {
     builder
@@ -92,6 +103,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { logout, changeStatus } = userSlice.actions;
+export const { logout, changeStatus, setMockUser } = userSlice.actions;
 
 export default userSlice.reducer;

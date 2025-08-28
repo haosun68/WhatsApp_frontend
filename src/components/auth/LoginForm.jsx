@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../features/userSlice";
-export default function RegisterForm() {
+export default function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status, error } = useSelector((state) => state.user);
@@ -73,7 +73,7 @@ export default function RegisterForm() {
           <p className="flex flex-col items-center justify-center mt-10 text-center text-md dark:text-dark_text_1">
             <span>you do not have an account ?</span>
             <Link
-              href="/register"
+              to="/register"
               className=" hover:underline cursor-pointer transition ease-in duration-300"
             >
               Sign up
