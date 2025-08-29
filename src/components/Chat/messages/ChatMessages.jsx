@@ -1,9 +1,16 @@
 import { useSelector } from "react-redux";
+import { useRef, useEffect } from "react";
 import Message from "./Message";
 
 export default function ChatMessages() {
   const { messages } = useSelector((state) => state.chat);
   const { user } = useSelector((state) => state.user);
+  const endRef = useRef();
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div
       className="mb-[60px] bg-[url('https://res.cloudinary.com/dmhcnhtng/image/upload/v1677358270/Untitled-1_copy_rpx8yb.jpg')]
@@ -21,6 +28,7 @@ export default function ChatMessages() {
               me={user._id === message.sender._id}
             />
           ))}
+        <div ref={endRef}></div>
       </div>
     </div>
   );
