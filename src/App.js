@@ -1,37 +1,26 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { io } from "socket.io-client";
+import SocketContext from "./context/SocketContext";
 //Pages
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { setMockUser } from "./features/userSlice";
+//socket io
+const socket = io(process.env.REACT_APP_API_ENDPOINT.split("/api/v1")[0]);
 
 function App() {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-  
-  useEffect(() => {
-    if (!user?.token) {
-      dispatch(setMockUser());
-    }
-  }, [dispatch, user?.token]);
-  
-  console.log("Current user:", user);
-  
   return (
     <div className="dark">
-      <Router>
-        <Routes>
-          <Route 
-            exact 
-            path="/" 
-            element={user?.token ? <Home /> : <Login />} 
-          />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-        </Routes>
-      </Router>
+      <SocketContext.Provider value={socket}>
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Home socket={socket} />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+          </Routes>
+        </Router>
+      </SocketContext.Provider>
     </div>
   );
 }
