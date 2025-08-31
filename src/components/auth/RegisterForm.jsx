@@ -52,7 +52,6 @@ export default function RegisterForm() {
       `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
       formData
     );
-    console.log(data);
     return data;
   };
   return (
@@ -123,7 +122,7 @@ export default function RegisterForm() {
           <p className="flex flex-col items-center justify-center mt-10 text-center text-md dark:text-dark_text_1">
             <span>have an account ?</span>
             <Link
-              to="/login"
+              href="/login"
               className=" hover:underline cursor-pointer transition ease-in duration-300"
             >
               Sign in
