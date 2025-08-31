@@ -12,7 +12,7 @@ function ChatActions({ socket }) {
   const [showPicker, setShowPicker] = useState(false);
   const [showAttachments, setShowAttachments] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { activeConversation, status } = useSelector((state) => state.chat);
+  const { activeConversation, status, files } = useSelector((state) => state.chat);
   const { user } = useSelector((state) => state.user);
   const { token } = user;
   const [message, setMessage] = useState("");
@@ -20,7 +20,7 @@ function ChatActions({ socket }) {
   const values = {
     message,
     convo_id: activeConversation._id,
-    files: [],
+    files,
     token,
   };
   const SendMessageHandler = async (e) => {
